@@ -1,23 +1,20 @@
 
 class DataSet {
-    private float[] x1;
-    private float[] x2;
-    private float[] y;
-
+    private double[] x;
+    private double[] y;
     public DataSet() {
-        x1 = new float[]{60,62,67,70,71,72,75,78};
-        x2 = new float[]{22,25,24,20,15,14,14,11};
-        y = new float[]{140,155,159,179,192,200,212,215};
+        // (−3,7.5),(−2,3),(−1,0.5),(0,1),(1,3),(2,6),(3,14)
+        x = new double[]{-3.0,-2.0,-1.0,0.0,1.0,2.0,3.0};
+        y = new double[]{7.5,3.0,7.5,1.0,3.0,6.0,14.0};
+        // x= new double[]{2,4,6};
+        // y = new double[]{3,6,4};
     }
-    public float[] getx1() {
-        return x1;
-    }
-
-    public float[] getx2() {
-        return x2;
+    public double[] getX() {
+        return x;
     }
 
-    public float[] getY() {
+
+    public double[] getY() {
         return y;
     }
 }
@@ -26,20 +23,20 @@ class DiscreteMaths {
     public DiscreteMaths() {}
 
     // funcion de media
-    public float mean(float[] data) {
-        float sum = 0;
+    public double mean(double[] data) {
+        double sum = 0;
     
         for (int i = 0; i < data.length; i++) {
             sum += data[i];
         }
     
-        float mean = sum / data.length;
+        double mean = sum / data.length;
         return mean;
     }
     
     // sumatoria de x1
-    public float sumx(float[] x) {
-        float totalx = 0;
+    public double sum_X(double[] x) {
+        double totalx = 0;
 
         for (int i = 0; i < x.length; i++) {
             totalx += x[i];
@@ -48,53 +45,86 @@ class DiscreteMaths {
     }
 
     // sumatoria de y 
-    public float sumY(float[] y) {
-        float totalY = 0;
+    public double sum_Y(double[] y) {
+        double totalY = 0;
 
         for (int i = 0; i < y.length; i++) {
             totalY += y[i];
         }
         return totalY;
     }
-
-    // sumatorias de x1 por y
-    public float sumXY(float[] x,float[] y) {
-        float totalXY = 0;
+    // sumXY
+    public double sum_XY(double[] x,double[] y) {
+        double totalXY = 0;
 
         for (int i = 0; i < y.length; i++) {
-            totalXY += x[i]*y[i];
+            totalXY += (x[i]*y[i]);
         }
         return totalXY;
     }
-
-    // sumatorias de x1 por y
-    public float sumx2Y(float[] x2,float[] y) {
-        float totalx2Y = 0;
-
-        for (int i = 0; i < y.length; i++) {
-            totalx2Y += x2[i]*y[i];
-        }
-        return totalx2Y;
-    }
-
-    // x al cuadrado
-    public float sum_xcuadrado(float[] x) {
-        float totalx = 0;
+    // sumX2Y
+    public double sum_X2Y(double[] x,double[]y) {
+        double totalX2Y = 0;
 
         for (int i = 0; i < x.length; i++) {
-            totalx += (x[i]*x[i]);
+            totalX2Y += ((x[i]*x[i])*y[i]);
         }
-        return totalx;
+        return totalX2Y;
+    }
+    // sumXX 
+    public double sum_XX(double[] x) {
+        double totalXX = 0;
+
+        for (int i = 0; i < x.length; i++) {
+            totalXX += (x[i]*x[i]);
+        }
+        return totalXX;
+    }
+    // sumXX2 
+    public double sum_XX2(double[] x) {
+        double totalXX2 = 0;
+
+        for (int i = 0; i < x.length; i++) {
+            totalXX2 += (x[i]*(x[i]*x[i]));
+        }
+        return totalXX2;
+    }
+    // sumx2x2 
+    public double sum_X2X2(double[] x) {
+        double totalX2X2 = 0;
+
+        for (int i = 0; i < x.length; i++) {
+            totalX2X2 += ((x[i]*x[i])*(x[i]*x[i]));
+        }
+        return totalX2X2;
     }
 
-    // sumatorias de x1 por x2
-    public float sumX1X2(float[] x1,float[] x2) {
-        float totalX1X2 = 0;
-        for (int i = 0; i < x1.length; i++) {
-            totalX1X2 += x1[i]*x2[i];
-            
+    // sumx2x2 
+    public double sum_X2(double[] x) {
+        double totalX2 = 0;
+
+        for (int i = 0; i < x.length; i++) {
+            totalX2 += (x[i]*x[i]);
         }
-        return totalX1X2;
+        return totalX2;
+    }
+    // Σ x 3  	
+    public double sum_X3(double[] x) {
+        double totalX3 = 0;
+
+        for (int i = 0; i < x.length; i++) {
+            totalX3 += (x[i]*x[i]*x[i]);
+        }
+        return totalX3;
+    }
+    // Σ x 4
+    public double sum_X4(double[] x) {
+        double totalX4 = 0;
+
+        for (int i = 0; i < x.length; i++) {
+            totalX4 += (x[i]*x[i]*x[i]*x[i]);
+        }
+        return totalX4;
     }
 
 }
@@ -103,55 +133,48 @@ class SimpleLinear {
     public static void main(String[] args) {
         DataSet dataset = new DataSet();
 		DiscreteMaths discretemaths= new DiscreteMaths();
+        double n       = dataset.getX().length;
+        double sumX    = discretemaths.sum_X(dataset.getX());
+        double sumY    = discretemaths.sum_Y(dataset.getY());
+        double sumX2   = discretemaths.sum_X2(dataset.getX());
+        double sumX3   = discretemaths.sum_X3(dataset.getX());
+        double sumX4   = discretemaths.sum_X4(dataset.getX());
+        // Σ x2  x2  = [ Σ x 4 ] - [ ( Σ x 2 )2 / n ]
+        double sumX2X2 = (sumX4)-(((sumX2*sumX2)/n));
+        // Σ x x2 = [ Σ x 3 ] - [ ( Σ x 2 * Σ x ) / n ]
+        double sumXX2  = (sumX3)-((sumX2*sumX)/n);
+        // Σ x x = [ Σ x 2 ] - [ ( Σ x )2 / n ]
+        double sumXX   = (sumX2)-((sumX*sumX)/n);
+        // Σ x2 y  = [ Σ x 2 y] - [ ( Σ x 2 * Σ y ) / n ]
+        double sumX2Y  = (discretemaths.sum_X2Y(dataset.getX(), dataset.getY())-((sumX2*sumY)/n));
+        // Σ x y = [ Σ x y ] - [ ( Σ x  *  Σ y ) / n ]
+        double sumXY   = (discretemaths.sum_XY(dataset.getX(),dataset.getY()))-((sumX*sumY)/n);
+        // a = { [ Σ x2 y * Σ xx ] - [Σ xy * Σ xx2 ] } /  { [ Σ xx * Σ x2x 2] - [Σ xx2 ]2 }
+        double a = ((sumX2Y*sumXX)-(sumXY*sumXX2))/((sumXX*sumX2X2)-(sumXX2*sumXX2));
+        // b = { [ Σ xy * Σ x2x2 ] - [Σ x2y * Σ xx2 ] } /  { [ Σ xx * Σ x2x 2] - [Σ xx2 ]2 }
+        double b = (((sumXY*sumX2X2)-(sumX2Y*sumXX2))/((sumXX*sumX2X2)-(sumXX2*sumXX2)));
+        // c =  [ Σ y / n ] - { b *  [ Σ x / n ] } -  { a * [ Σ x 2  / n ]  }
+        double c = (sumY/n)-(b*(sumX/n))-(a*(sumX2/n));
         
-        float n         = dataset.getx1().length;
-        float sumx1     = discretemaths.sumx(dataset.getx1());
-        float sumx2     = discretemaths.sumx(dataset.getx2());
-
-        float sumY      = discretemaths.sumY(dataset.getY());
-        // ΣX1y – (ΣX1Σy) / n
-        float sumx1Y    = discretemaths.sumXY(dataset.getx1(),dataset.getY())-(sumx1*sumY)/n;
-        // ΣX12 – (ΣX1)2 / n
-        float sumX1_2    = discretemaths.sum_xcuadrado(dataset.getx1()) - (sumx1*sumx1)/n;
-        
-
-        // ΣX22 – (ΣX2)2 / n 
-        float sumX2_2    = discretemaths.sum_xcuadrado(dataset.getx2()) - (sumx2*sumx2)/n;
-
-        // ΣX2y – (ΣX2Σy) / n
-        float sumX2Y     = discretemaths.sumXY(dataset.getx2(),dataset.getY())-(sumx2*sumY)/n;
-        // ΣX1X2 – (ΣX1ΣX2) / n
-        float sumX1X2    = discretemaths.sumX1X2(dataset.getx1(),dataset.getx2())-(sumx1*sumx2)/n;
-
-        // Obtencion d beta 1 [(Σx22)(Σx1y)  – (Σx1x2)(Σx2y)]  / [(Σx12) (Σx22) – (Σx1x2)2]
-        float b1 = (((sumX2_2)*(sumx1Y))-((sumX1X2)*(sumX2Y)))/(((sumX1_2)*(sumX2_2))-(sumX1X2*sumX1X2));
-        // Obtencion de beta 2 [(Σx12)(Σx2y)  – (Σx1x2)(Σx1y)]  / [(Σx12) (Σx22) – (Σx1x2)2]
-        float b2 = (((sumX1_2)*(sumX2Y))-((sumX1X2)*(sumx1Y)))/(((sumX1_2)*(sumX2_2))-(sumX1X2*sumX1X2));
-        // Obtencion de beta 0  b0 is: y – b1X1 – b2X2
-        float b0 = discretemaths.mean(dataset.getY()) - b1*discretemaths.mean(dataset.getx1()) - b2*discretemaths.mean(dataset.getx2());
-
-        System.out.println("Entrada b0: "+b0+" Entrada b1: "+b1+" Entrada b2: "+b2);
-        
-        float yMean = discretemaths.mean(dataset.getY());
-        float sst = 0;
-        float sse = 0;
-        
-        for (int i = 0; i < dataset.getx1().length; i++) {
-            // ŷ = b0 + b1*x1 + b2*x2
-            float yPred = b0 + b1*dataset.getx1()[i] + b2*dataset.getx2()[i];
-            System.out.println("Entrada x1: "+dataset.getx1()[i]+" Entrada x2: "+dataset.getx2()[i]+" Predeccion Y: "+yPred);
-            float yActual = dataset.getY()[i];
-            
-            sst += (yActual - yMean) * (yActual - yMean);
-            sse += (yActual - yPred) * (yActual - yPred);
+        System.out.println("c: "+c);
+        System.out.println("b: "+b);
+        System.out.println("a: "+a);
+ 
+        // SSE=∑(yi−axi2−bxi−c)2 
+        //  SST=∑(yi−y¯)2
+        double meanY = discretemaths.mean(dataset.getY());
+        double sse = 0;
+        double sst = 0;
+        for (int i = 0; i < dataset.getX().length; i++) {
+            // Quadratic Regression Equation y = a x^2 + b x + c
+            double yPred = a*(dataset.getX()[i]*dataset.getX()[i])+ b *dataset.getX()[i]+c;
+            sse += (dataset.getY()[i] - yPred)*(dataset.getY()[i] - yPred);
+            sst += (dataset.getY()[i] - meanY)*(dataset.getY()[i] - meanY);
+            System.out.println("Entrada X: "+dataset.getX()[i]+" Predeccion Y: "+yPred);
         }
-        
-        float rSquared = sse / sst;
-        
-        System.out.println("R^2: " + rSquared);
-        
 
-
-
+        double r2 = 1 - sse/sst;
+        System.out.println("R2: " + r2);
+        // R2=1−SSE/SST
     }
 }
